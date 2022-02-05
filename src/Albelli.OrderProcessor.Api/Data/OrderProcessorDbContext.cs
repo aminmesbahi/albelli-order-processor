@@ -1,7 +1,8 @@
 using Albelli.OrderProcessor.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Albelli.OrderProcessor.Api.Data{
+namespace Albelli.OrderProcessor.Api.Data
+{
     public class OrderProcessorDbContext : DbContext
     {
         public OrderProcessorDbContext(DbContextOptions options) : base(options)
@@ -15,11 +16,11 @@ namespace Albelli.OrderProcessor.Api.Data{
             modelBuilder.Entity<Order>()
             .HasMany(o => o.Items)
             .WithOne();
-            
+
             modelBuilder.Entity<Product>().Property(p => p.Name).HasMaxLength(50);
 
             modelBuilder.Entity<Product>().HasData(Seed.Products);
-            modelBuilder.Entity<Order>().HasData(Seed.Orders);            
+            modelBuilder.Entity<Order>().HasData(Seed.Orders);
             modelBuilder.Entity<OrderItem>().HasData(Seed.OrderItems);
             modelBuilder
                 .Entity<Order>()

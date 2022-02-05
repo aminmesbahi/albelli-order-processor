@@ -4,7 +4,7 @@ namespace Albelli.OrderProcessor.Api.Models
     {
         public Product()
         {
-            
+
         }
         public Product(int id, string name, decimal width, int stackItemsCount)
         {
@@ -15,7 +15,7 @@ namespace Albelli.OrderProcessor.Api.Models
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public decimal Width { get; set; }
         public int StackItemsCount { get; set; }
     }

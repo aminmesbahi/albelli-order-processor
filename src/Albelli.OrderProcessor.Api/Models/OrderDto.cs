@@ -1,11 +1,14 @@
-namespace Albelli.OrderProcessor.Api.Models{
-    public record OrderDto{
+namespace Albelli.OrderProcessor.Api.Models
+{
+    public record OrderDto
+    {
         public int OrderId { get; init; }
-        public IEnumerable<OrderItemDto> Items { get; set; } 
-        public decimal RequiredBinWidth{get; set;} 
+        public List<OrderItemDto> Items { get; set; } = new List<OrderItemDto>();
+        public decimal RequiredBinWidth { get; set; }
     }
-    public record OrderItemDto{
-        public string Product { get; set; }
+    public record OrderItemDto
+    {
+        public string Product { get; set; } = String.Empty;
         public int Quantity { get; set; }
         public decimal Width { get; set; }
     }

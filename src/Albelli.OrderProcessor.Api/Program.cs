@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Db");
 
 builder.Services.AddDbContext<OrderProcessorDbContext>(x => x.UseSqlite(connectionString));
-builder.Services.AddScoped<IOrderProcessingService,OrderProcessingService>();
+builder.Services.AddScoped<IOrderProcessingService, OrderProcessingService>();
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Add services to the container.
