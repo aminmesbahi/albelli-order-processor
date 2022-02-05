@@ -1,7 +1,4 @@
-using Albelli.OrderProcessor.Api.Data;
-using Albelli.OrderProcessor.Api.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Albelli.OrderProcessor.Api.Services
 {
@@ -70,6 +67,21 @@ namespace Albelli.OrderProcessor.Api.Services
                 }
             }
             return total;
+        }
+
+        public async Task<OrderDto> GetOrderDatailsById(int id)
+        {
+#pragma warning disable CS8603 // Possible null reference return.
+            return await _context.Orders
+                .Where(o => o.Id == id)
+                .Select(x => new
+                OrderDto
+                {
+                    OrderId = x.Id,
+                    Items = x.Items.Select(y => new OrderItemDto { Product = y.Product.Name, Quantity = y.Quantity, Width = y.Product.Width }).ToList(),
+                    RequiredBinWidth = x.RequiredBinWidth
+                }).SingleOrDefaultAsync();
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }

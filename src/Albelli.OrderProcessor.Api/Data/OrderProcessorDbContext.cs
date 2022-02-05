@@ -1,4 +1,3 @@
-using Albelli.OrderProcessor.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Albelli.OrderProcessor.Api.Data

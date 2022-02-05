@@ -1,5 +1,3 @@
-using Albelli.OrderProcessor.Api.Models;
-
 namespace Albelli.OrderProcessor.Api.Data
 {
     public static class Seed

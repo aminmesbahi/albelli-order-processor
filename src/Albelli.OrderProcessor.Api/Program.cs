@@ -1,7 +1,7 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
-using Albelli.OrderProcessor.Api.Data;
-using Albelli.OrderProcessor.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,14 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setup =>
+{
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    setup.EnableAnnotations();
+    setup.SwaggerDoc("v1",
+        new OpenApiInfo { Description = "Order Processor API", Title = "Albelli Assessment", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -25,7 +32,7 @@ await EnsureDbAsync(app.Services);
 // Configure the HTTP request pipeline.
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(options=>options.DefaultModelsExpandDepth(-1));
 
 
 app.UseHttpsRedirection();
