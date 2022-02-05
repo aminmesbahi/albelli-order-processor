@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Albelli.OrderProcessor.Api",
+            "group": "Albelli",
+            "database": "${workspaceFolder:albelli-order-processor}/src/Albelli.OrderProcessor.Api/Application.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
