@@ -35,6 +35,10 @@ dotnet run --project .\src\Albelli.OrderProcessor.Api\Albelli.OrderProcessor.Api
 ## **Unit Tests Results**
 ![Tests View](docs/unit_tests.png)
 
+## **Build and Unit Tests Results**
+![Tests View](docs/build.png)
+
+
 ---
 <br>
 
