@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Albelli.OrderProcessor.Api.Data
 {
-    public class OrderProcessorDbContext : DbContext
+    public class OrderProcessorDbContext : DbContext, IOrderProcessorDbContext
     {
         public OrderProcessorDbContext(DbContextOptions options) : base(options)
         {
