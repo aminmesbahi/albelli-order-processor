@@ -13,11 +13,16 @@ namespace Albelli.OrderProcessor.Test;
 
 public class OrderProcessorTests
 {
+    private OrderProcessingServiceFake service;
+    public OrderProcessorTests()
+    {
+        service = new OrderProcessingServiceFake();
+    }
+
     [Fact]
     public void Calculate_min_bin_width_for_simple_order()
     {        
-        //Arrange
-        var service = new OrderProcessingServiceFake();
+        //Arrange        
         var req1 = new List<OrderItem>{ new OrderItem (1, 1) };
 
         //Act
@@ -31,7 +36,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_simple_repeated_multiple_orders()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req2 = new List<OrderItem> { new OrderItem(1, 1), new OrderItem(1, 2) };
 
         //Act
@@ -45,7 +49,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_simple_multiple_orders()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req3 = new List<OrderItem> { new OrderItem(1, 1), new OrderItem(5, 1), new OrderItem(2, 2) };
 
         //Act
@@ -59,7 +62,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_stackable_item_bordered_quantity()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req4 = new List<OrderItem> { new OrderItem(1, 1), new OrderItem(5, 4) };
 
         //Act
@@ -73,7 +75,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_stackable_item_beyound_one_stack_in_multiple_records()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req5 = new List<OrderItem> { new OrderItem(5, 1), new OrderItem(5, 4) };
 
         //Act
@@ -87,7 +88,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_mutltiple_stacks_of_items()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req6 = new List<OrderItem> { new OrderItem(5, 5), new OrderItem(5, 4), new OrderItem(3, 4) };
 
         //Act
@@ -101,7 +101,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_mutltiple_stacks_of_items_beyond_stack_quanitity()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req7 = new List<OrderItem> { new OrderItem(5, 1), new OrderItem(5, 2), new OrderItem(5, 2) };
 
         //Act
@@ -115,7 +114,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_for_combination_of_stackable_and_simple()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req8 = new List<OrderItem> { new OrderItem(5, 3), new OrderItem(5, 2), new OrderItem(4, 1) };
 
         //Act
@@ -129,7 +127,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_simple_order_with_floating_ponit()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req9 = new List<OrderItem> { new OrderItem(4, 1) };
 
         //Act
@@ -143,7 +140,6 @@ public class OrderProcessorTests
     public void Calculate_min_bin_width_for_empty_list_of_items()
     {
         //Arrange
-        var service = new OrderProcessingServiceFake();
         var req10 = new List<OrderItem> { };
 
         //Act
@@ -159,17 +155,20 @@ public class OrderProcessingServiceFake : IOrderProcessingService
     private List<Product> _products;
     private List<Order> _orders;
     private List<OrderItem> _orderItems;
- 
-    public decimal CalculateRequiredBinWidth(List<OrderItem> Items)
+    
+    public OrderProcessingServiceFake()
     {
         //Setup
-        var _context = new Mock<IOrderProcessorDbContext>();
+        _context = new Mock<IOrderProcessorDbContext>();
         _products = new List<Product>(Seed.Products);
         _orders = new List<Order>(Seed.Orders);
         _orderItems = new List<OrderItem>(Seed.OrderItems);
         _context.Setup(x => x.Products).ReturnsDbSet(_products);
         _context.Setup(x => x.Orders).ReturnsDbSet(_orders);
         _context.Setup(x => x.OrderItems).ReturnsDbSet(_orderItems);
+    }
+    public decimal CalculateRequiredBinWidth(List<OrderItem> Items)
+    {
 
         Items = Items.GroupBy(i => i.ProductId).Select(g => new OrderItem(g.Key, g.Sum(i => i.Quantity))).ToList();
 

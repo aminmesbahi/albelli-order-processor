@@ -33,7 +33,7 @@ namespace Albelli.OrderProcessor.Api.Controllers
             else
                 return Ok(result);
         }
-#pragma warning disable 1591
+#pragma warning disable CS1573
         /// <summary>
         /// Process an Order.
         /// </summary>
@@ -79,5 +79,5 @@ namespace Albelli.OrderProcessor.Api.Controllers
                 return BadRequest();            
         }
     }
-#pragma warning restore 1591
+#pragma warning restore CS1573
 }
