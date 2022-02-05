@@ -29,8 +29,8 @@ dotnet run --project .\src\Albelli.OrderProcessor.Api\Albelli.OrderProcessor.Api
 <img src="docs/swagger3.png" width="400">
 
 ## **Project structure**
-<img src="docs/project_structure.png" width="400">
-<img src="docs/project_structure2.png" width="400">
+<img src="docs/project_structure.png" width="350">
+<img src="docs/project_structure2.png" width="350">
 
 
 ## **Unit Tests Results**
