@@ -25,8 +25,8 @@ dotnet run --project .\src\Albelli.OrderProcessor.Api\Albelli.OrderProcessor.Api
 ## **Swagger**
 ![Swagger](docs/swagger1.png)
 <br>
-<img src="docs/swagger2.png" width="500">
-<img src="docs/swagger3.png" width="500">
+<img src="docs/swagger2.png" width="400">
+<img src="docs/swagger3.png" width="400">
 
 ## **Project structure**
 ![Project Structure](docs/project_structure.png)
